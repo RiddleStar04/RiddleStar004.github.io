@@ -1,114 +1,221 @@
-:root{
-    --primary: #fff;
-    --bg-color: rgb(5, 53, 61);
-    --bg-envelope-color: #f5edd1;
-    --envelope-tab: #ecdeb8;
-    --envelope-cover: #e6cfa7;
-    --shadow-color: rgba(0, 0, 0, 0.2);
-    --txt-color: #444;
-    --heart-color: rgb(252,8,231);
-}
-body{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: var(--bg-color);
+}
+
+:root {
+    --primario: #fff;
+    --fondo: #ffebf2; 
+    --fondo-sobre: #ffe3ed; 
+    --solapa-sobre: #ffccd5; 
+    --cuerpo-sobre: #ffc1d1; 
+    --sombra: rgba(0, 0, 0, 0.2);
+    --texto: #003049; 
+    --corazon: #ff477e; 
+}
+
+body {
+    background: var(--fondo);
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.container{
+    flex-direction: column;
     height: 100vh;
-    display: grid;
-    place-items: center;
 }
-.container > .envelope-wrapper{
-    background: var(--bg-envelope-color);
-    box-shadow: 0 0 40px var(--shadow-color);
+
+h1 {
+    font-family: "Marck Script", serif; 
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 50px;
+    color: #444;
 }
-.container > .envelope-wrapper > .envelope{
+
+.contenedor {
+    width: 400px;
+}
+
+.envoltura-sobre {
     position: relative;
-    width: 300px;
-    height: 230px;
+    background-color: var(--fondo-sobre);
+    box-shadow: 0 0 40px var(--sombra);
+    border-radius: 15px;
 }
-.container > .envelope-wrapper > .envelope::before{
-    content: '';
+
+.sobre {
+    position: relative;
+    width: 400px;
+    height: 300px;
+}
+
+.sobre::before {
+    content: "";
     position: absolute;
-    z-index: 3;
-    border-top: 130px solid var(--envelope-tab);
-    border-right: 150px solid transparent;
-    border-left: 150px solid transparent;
     top: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    border-top: 180px solid var(--solapa-sobre);
+    border-right: 200px solid transparent;
+    border-left: 200px solid transparent;
     transform-origin: top;
     transition: all 0.5s ease-in-out 0.7s;
+    border-radius: 10px;
 }
-.container > .envelope-wrapper > .envelope::after{
-    content: '';
+
+.solapa-derecha {
     position: absolute;
-    z-index: 3;
-    border-top: 130px solid transparent;
-    border-left: 150px solid var(--envelope-cover);
-    border-right: 150px solid var(--envelope-cover);
-    border-bottom: 100px solid var(--envelope-cover);
-    bottom: 0;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    background-color: var(--cuerpo-sobre);
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
-.letter{
+
+.solapa-izquierda {
     position: absolute;
-    right: 20%;
-    bottom: 0;
-    width: 54%;
-    height: 80%;
-    background: var(--primary);
-    transition: all 1s ease-in-out;
-    padding: 20px 10px;
-    box-shadow: 0 0 10px var(--shadow-color);
-    z-index:0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+    background-color: var(--cuerpo-sobre);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
-.letter > .text{
-    font-family: 'Gill Sans MT', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 10px;
-    color: var(--txt-color);
+
+.carta {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primario);
+    text-align: center;
+    box-shadow: 0 0 5px var(--sombra);
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform .5s ease-in-out;
+}
+
+.contenido {
+    font-family: "Gill Sans", Calibri, sans-serif;
+    color: var(--texto);
     text-align: left;
+    font-size: 12px;
+    border: 3px dotted var(--texto);
+    padding: 10px;
+    height: 100%;
+    line-height: 14px;
+    cursor: pointer;
+    overflow-Y: scroll;
 }
-.heart{
+
+.corazon {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 15px;
-    height: 15px;
-    background: var(--heart-color);
-    z-index: 4;
-    transform: translate(-50%, -20%) rotate(45deg);
+    width: 30px;
+    height: 30px;
+    background-color: var(--corazon);
+    transform: translate(-50%,0) rotate(45deg);
     transition: transform 0.5s ease-in-out 1s;
-    box-shadow: 0 0 10px var(--shadow-color);
+    z-index: 999;
     cursor: pointer;
 }
-.heart::before,
-.heart::after{
-    content: '';
+
+.corazon::before,
+.corazon::after {
+    content: "";
     position: absolute;
-    width: 15px;
-    height: 15px;
-    background: var(--heart-color);
-    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: var(--corazon);
+    border-radius: 100%;
+
 }
-.heart::before{
-    top: -7.5px;
+
+.corazon:before {
+    top: -15px;
 }
-.heart::after{
-    right: 7.5px;
+
+.corazon:after {
+    right: 15px;
 }
-.flap > .envelope::before{
-    z-index: 0;
+
+/*Agregar clases dinamicos*/
+.abierto .sobre::before {
     transform: rotateX(180deg);
+    z-index: 0;
 }
-.flap > .envelope .letter{
-    bottom: 100px;
-    transform: scale(1.5);
-    transition-delay: 1s;
-    z-index: 3;
+
+.abierto .corazon {
+    transform: rotate(90deg);
+    transition-delay: 0.4s;
 }
-.flap > .heart{
-   transform: rotate(90deg);
-   transition-delay: 0.4s;
+
+.carta.mostrar-carta {
+    transform: translateY(-290px);
+    transition: transform .5s ease-in-out;
+}
+
+.carta.cerrando-carta {
+    transform: translateY(-290px);
+    transition: transform .5s ease-in-out;
+}
+
+.carta.abierta {
+    z-index: 10000;
+}
+
+.envoltura-sobre.desactivar-sobre .sobre::before {
+    pointer-events: none;
+}
+
+/*Scroll personalizado*/
+
+/*
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--cuerpo-sobre);
+    border-radius: 4px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--corazon);
+}
+*/
+
+/*Vista celular*/
+
+@media screen and (max-width:400px) {
+    .contenedor {
+        width: 300px;
+    }
+
+    .sobre {
+        width: 300px;
+        height: 250px;
+    }
+
+    .sobre::before {
+        border-top:150px solid var(--solapa-sobre) ;
+        border-right: 150px solid transparent;
+        border-left: 150px solid transparent;
+    }
+
 }
